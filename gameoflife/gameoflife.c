@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-#define SIZE 45
-#define DENSITY 5 // lower is higher density....
+#include <sys/time.h>
+#define SIZE_HEIGHT 55
+#define SIZE_WIDTH 190
+#define DENSITY 25 // lower is higher density....
 
 void prettyPrint (int** array);
 int** makeArray ();
@@ -23,7 +24,11 @@ int main (void) {
     prettyPrint (layer1);
 
     while (1) {
-        getchar();
+
+        struct timeval bad;
+        bad.tv_sec = 0;
+        bad.tv_usec = 50000;
+        select (0, NULL, NULL, NULL, &bad);
         iterate (layer1, layer2);
 
         prettyPrint (layer2);
@@ -37,10 +42,10 @@ int main (void) {
 }
 
 int** makeArray () {
-    int** retArray = malloc(sizeof(int**)*SIZE);
+    int** retArray = malloc(sizeof(int**)*SIZE_HEIGHT);
     int i = 0;
-    while (i < SIZE) {
-        retArray[i] = malloc(SIZE*sizeof(int));
+    while (i < SIZE_HEIGHT) {
+        retArray[i] = malloc(SIZE_WIDTH*sizeof(int));
         i++;
     }
 
@@ -51,9 +56,9 @@ int** makeArray () {
 void populate (int** array) {
     int i, j;
     i = 0;
-    while (i < SIZE) {
+    while (i < SIZE_HEIGHT) {
         j = 0;
-        while (j < SIZE) {
+        while (j < SIZE_WIDTH) {
             if (rand() % DENSITY == 0) {
                 array[i][j] = 1;
             } else {
@@ -69,9 +74,9 @@ void populate (int** array) {
 void iterate (int** source, int** new) {
     int i, j;
     i = 0;
-    while (i < SIZE) {
+    while (i < SIZE_HEIGHT) {
         j = 0;
-        while (j < SIZE) {
+        while (j < SIZE_WIDTH) {
             int neighbours = countNeighbours (i, j, source);
             if (source[i][j] == 1) {
                 // fewer than 2 neighbours - dies
@@ -102,10 +107,10 @@ int countNeighbours (int x, int y, int** array) {
     if (x-1 >= 0) {
         canGoLeft = 1;
     }
-    if (x+1 < SIZE) {
+    if (x+1 < SIZE_HEIGHT) {
         canGoRight = 1;
     }
-    if (y+1 < SIZE) {
+    if (y+1 < SIZE_WIDTH) {
         canGoUp = 1;
     }
     if (y-1 >= 0) {
@@ -145,11 +150,11 @@ int countNeighbours (int x, int y, int** array) {
 
 void prettyPrint (int** array) {
     int x = 0;
-    int y = SIZE-1;
+    int y = SIZE_HEIGHT-1;
     while (y >= 0) {
         x = 0;
-        while (x < SIZE-1) {
-            if (array[x][y] == 1) {
+        while (x < SIZE_WIDTH-1) {
+            if (array[y][x] == 1) {
                 printf ("#");
             } else {
                 printf (" ");
@@ -159,7 +164,6 @@ void prettyPrint (int** array) {
         printf ("\n");
         y--;
     }
-    printf ("********************************************************\n");
     return;
 }
 

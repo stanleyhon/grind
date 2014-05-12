@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-#define SIZE 50
+#define SIZE 45
 #define DENSITY 5 // lower is higher density....
 
 void prettyPrint (int** array);

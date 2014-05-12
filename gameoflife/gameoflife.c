@@ -4,7 +4,8 @@
 #include <time.h>
 
 #define SIZE 50
-#define DENSITY 20
+#define DENSITY 5 // lower is higher density....
+
 void prettyPrint (int** array);
 int** makeArray ();
 void populate (int** array);

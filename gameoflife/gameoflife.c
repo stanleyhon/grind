@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #define SIZE_HEIGHT 55
 #define SIZE_WIDTH 190
-#define DENSITY 25 // lower is higher density....
+#define DENSITY 10 // lower is higher density....
 
 void prettyPrint (int** array);
 int** makeArray ();
@@ -27,7 +27,7 @@ int main (void) {
 
         struct timeval bad;
         bad.tv_sec = 0;
-        bad.tv_usec = 50000;
+        bad.tv_usec = 10000;
         select (0, NULL, NULL, NULL, &bad);
         iterate (layer1, layer2);
 

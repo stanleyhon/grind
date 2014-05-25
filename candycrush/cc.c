@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-#define SIZE 1000
+#define SIZE 10
 #define COLOURS 2
 
 #define NONE -1
@@ -29,7 +28,7 @@ int main ( void ) {
 
     // generate random board.
     generateRandom (array);
-    // printBoard (array);
+    printBoard (array);
 
     // stop three in a row?
     int result = DIRTY;

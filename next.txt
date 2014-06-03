@@ -1,0 +1,4 @@
+- heapify
+- n puzzle solver
+- string insertion 1911 exam
+- 

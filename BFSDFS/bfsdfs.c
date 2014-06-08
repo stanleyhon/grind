@@ -75,6 +75,48 @@ void push (struct stack * s, struct node * ptr) {
     s->stack[s->end++] = ptr;
 }
 
+void dfs_postorder (struct node * root) {
+    // traverse left tree
+    int idx = 0;
+    while (idx < MAX_CHILDREN/2) {
+        if (root->children[idx] != NULL) {
+            dfs_postorder (root->children[idx]);
+        }
+        idx++;
+    }
+    while (idx < MAX_CHILDREN) {
+        if (root->children[idx] != NULL) {
+            if (root->children[idx] != NULL) {
+                dfs_postorder (root->children[idx]);
+            }
+        }
+        idx++;
+    }
+    printf ("Processing a payload %d\n", root->payload);
+    return;
+}
+
+void dfs_inorder (struct node * root) {
+    // traverse left tree
+    int idx = 0;
+    while (idx < MAX_CHILDREN/2) {
+        if (root->children[idx] != NULL) {
+            dfs_postorder (root->children[idx]);
+        }
+        idx++;
+    }
+    printf ("Processing a payload %d\n", root->payload);
+    while (idx < MAX_CHILDREN) {
+        if (root->children[idx] != NULL) {
+            if (root->children[idx] != NULL) {
+                dfs_postorder (root->children[idx]);
+            }
+        }
+        idx++;
+    }
+    return;
+}
+
 int main (void) {
 
     struct queue queue;
@@ -95,12 +137,11 @@ int main (void) {
     addNode (new, 2);
     addNode (new, 2);
 
-    int payload = 13;
+    int payload = 3;
     int childNumber = 0;
     while (childNumber < 10) {
         addNode (new->children[childNumber], payload);
         addNode (new->children[childNumber], payload);
-        payload++;
         childNumber++;
     }
 
@@ -116,27 +157,15 @@ int main (void) {
             }
             idx++;
         }
-    } 
+    }
 
     printf ("****************************\n");
 
-    // DFS
-    struct stack s;
-    s.end = 0;
-    memset (s.stack, 0, 1000);
-    push (&s, new);
+    dfs_postorder (new);
 
-    while (s.end != 0) {
-        struct node * target = pop (&s);
-        printf ("looking at %d\n", target->payload);
-        int idx = 0;
-        while (idx < MAX_CHILDREN) {
-            if (target->children[idx] != NULL) {
-                push (&s, target->children[idx]);
-            }
-            idx++;
-        }
-    }
+    printf ("****************************\n");
+
+    dfs_inorder (new);
 
     return EXIT_SUCCESS;
 }

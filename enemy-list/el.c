@@ -39,11 +39,25 @@ struct Node * newNodeWithInfo (struct Node * next, struct Node * enemy, int uniq
     return new;
 }
 
+void delete (struct Node * head) {
+    while (head != NULL) {
+        struct Node * del = head;
+        head = head->next;
+        del->next = NULL;
+        del->enemy = NULL;
+        del->uniqueID = -1;
+        free (del);
+    }
+    return;
+}
+
+
 struct Node * deepCopy (struct Node * head) {
     struct Node * originalHead = head;
     // copy the list but put the nodes between the old list
     while (head != NULL) {
         struct Node * new = newNodeWithInfo (head->next, NULL, head->uniqueID);
+        new->next = head->next;
         head->next = new;
         head = new->next;
     }
@@ -63,8 +77,9 @@ struct Node * deepCopy (struct Node * head) {
     while (ptr != NULL) {
         ptr->next = newList->next;
         if (newList->next != NULL) {
-            newList = newList->next->next;
+            newList->next = newList->next->next;
         }
+        newList = newList->next;
         ptr = ptr->next;
     }
 
@@ -83,11 +98,19 @@ int main (void) {
     newList->next->next->enemy = newList;
     newList->next->next->next->enemy = newList->next->next;
 
+    printf ("Old list: ");
     printList (newList); 
 
     struct Node * clone = deepCopy (newList);
 
+    printf ("clone list: ");
     printList (clone);
+
+    delete (newList);
+
+    printf ("clone list: ");
+    printList (clone);
+    
 
     return EXIT_SUCCESS;
 }

@@ -1,5 +1,13 @@
 // given an array, find the smallest and largest values in the array
 // do it in less than 2N comparisons.
+// take elements out of the array two at a time
+// compare them with eachother,
+// then compare the lower one with min to see if it's the new min
+// and compare the larger one with max to see if it's the new max.
+
+// this is O (2N/3)~ since doing the extra comparison of the pair, saves you comparing the larger of the two with min
+// and the smaller of the two with max.
+
 
 #include <stdio.h>
 #include <stdlib.h>

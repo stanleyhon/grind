@@ -1,4 +1,21 @@
-- heapify
+-bleh
 - n puzzle solver
-- string insertion 1911 exam
-- 
+
+- balanced binary tree (these are hard)
+    - RB tree
+    - AVL
+    - Splaytree
+
+- list of strings fb
+- find highest mult of two strings
+- value is length of each distinct, compatability only distinct
+
+- tuple sorted lists inplace insertion fb
+
+- find highest value in list, if multiple instances, pick one from balanced random. no extra space fb
+
+- two values summed to another in array, no extra space optional restriction fb
+
+- atoi (tostring of int)
+
+- N people in a party consisting of celebrities and normal people. All normal people know the celebrities but celebrities don't know anyone but themselves. Write code to find the celebrity. 

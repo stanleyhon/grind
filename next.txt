@@ -1,4 +1,3 @@
--bleh
 - n puzzle solver
 
 - balanced binary tree (these are hard)

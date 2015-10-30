@@ -18,3 +18,5 @@
 - atoi (tostring of int)
 
 - N people in a party consisting of celebrities and normal people. All normal people know the celebrities but celebrities don't know anyone but themselves. Write code to find the celebrity. 
+
+- given an array of values, find a peak (defined as a value whose left right direct neighbours are equal or lower) in O(logn)
